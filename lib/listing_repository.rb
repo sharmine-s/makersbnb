@@ -1,4 +1,4 @@
-require "listing"
+require_relative 'listing'
 
 class ListingRepository
   def all
@@ -14,14 +14,17 @@ class ListingRepository
     return listings
   end
 
-  def find
-
+  def find(id)
+    result_set = fetch_data(id)
+    create_listing_object(result_set.first)
   end
 
-  def create
+  private
+  
+  def fetch_data(id)
+    sql = 'SELECT id, title, description, img, price, location, user_id FROM listings WHERE id = $1;'
+    DatabaseConnection.exec_params(sql, [id])
   end
-
-  private 
 
   def create_listing_object(record)
     listing = Listing.new

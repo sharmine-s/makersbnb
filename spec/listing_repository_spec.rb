@@ -17,4 +17,13 @@ describe ListingRepository do
     expect(listings[0].location). to eq('Hollywood,LA')
   end
 
-end
+    
+  it 'finds listing 1' do
+    repo = ListingRepository.new
+    listing = repo.find(1)
+  #   expect(listing.title).to eq('HollyWood Mansion')
+    expect(listing.description).to eq('A beautiful mansion right under the hollywood sign in LA')
+
+  end
+
+end 
