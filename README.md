@@ -10,6 +10,15 @@ Someone in your team should fork this seed repo to their Github account. Everyon
 # Install gems
 bundle install
 
+#create database on command line
+createdb makersbnb
+createdb makersbnb_test
+psql -h 127.0.0.1 makersbnb < spec/seeds.sql
+psql -h 127.0.0.1 makersbnb_test < spec/seeds.sql
+psql -h 127.0.0.1 makersbnb < spec/seeds_listings.sql
+psql -h 127.0.0.1 makersbnb_test < spec/seeds_listings.sql
+
+
 # Run the tests
 rspec
 
