@@ -2,9 +2,18 @@
     <head>
     </head>
 
-    <body>
-        <h1>Listing Name</h1>
-        <p>Location, Description, Price </p>
+    <body style="background-image: url('<%= @listing.img %>');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;">
+    
+        <h1><%= @listing.title %></h1>
+        <p>
+           Location <%= @listing.location %>
+           Description <%= @listing.description %>
+           Price <%= @listing.price %>
+           Image <%= @listing.img %>
+        </p>
 
         <form action="/booking" method="POST">
         <label>name</label>
