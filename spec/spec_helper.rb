@@ -2,7 +2,7 @@ ENV['ENV'] = 'test'
 
 require 'database_connection'
 
-DatabaseConnection.connect('makersbnb_test')
+DatabaseConnection.connect
 
 def reset_all_tables
   seed_sql = File.read('spec/seeds_listings.sql')
