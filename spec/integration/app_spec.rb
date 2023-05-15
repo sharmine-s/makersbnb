@@ -30,4 +30,13 @@ describe Application do
       expect(response.body).to include("<img src='https://robbreport.com/wp-content/uploads/2019/03/002-crop.jpg?w=1000' alt='Nicolas Cage>")
     end
   end
+
+  context 'GET /listing/:id' do
+    it 'should show the information of listing 1' do
+      response = get('/listing/1')
+
+      expect(response.status).to eq 200
+      expect(response.body).to include '<h1>Listing Name</h1>'
+    end
+  end
 end

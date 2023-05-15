@@ -9,6 +9,10 @@ class Application < Sinatra::Base
   get '/' do
     return erb(:index)
   end
+
+  get '/listing/:id' do
+    return erb(:listing)
+  end
 end
 
 =begin IMPLIMENT WHEN DATABASE ADDED
