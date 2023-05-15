@@ -27,7 +27,7 @@ class Application < Sinatra::Base
     return erb(:listing)
   end
 
-  post '/booking/:id' do
+  post '/booking' do
     @listing = ListingRepository.new
 
     return erb(:confirm)
