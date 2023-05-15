@@ -1,4 +1,4 @@
-require_relative 'listing'
+require "listing"
 
 class ListingRepository
   def all
@@ -17,6 +17,7 @@ class ListingRepository
   def find
 
   end
+
   def create
   end
 

@@ -1,7 +1,7 @@
-require 'sinatra/base'
-require 'sinatra/reloader'
-require_relative './lib/listing_repository'
-require_relative './lib/database_connection'
+require "sinatra/base"
+require "sinatra/reloader"
+require_relative "./lib/listing_repository"
+require_relative "./lib/database_connection"
 
 DatabaseConnection.connect
 
@@ -10,16 +10,19 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  get '/' do
+  get "/" do
     repo = ListingRepository.new
     @listings = repo.all
     return erb(:index)
   end
 
-  get '/listing/:id' do
+  get "/listing/:id" do
     return erb(:listing)
   end
+
+  post "/booking/:id" do
+    @listing = ListingRepository.new
+
+    return erb(:confirm)
+  end
 end
-
-
-
