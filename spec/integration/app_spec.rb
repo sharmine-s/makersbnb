@@ -25,4 +25,13 @@ describe Application do
       expect(response.status).to eq(200)
     end
   end
+
+  context 'GET /listing/:id' do
+    it 'should show the information of listing 1' do
+      response = get('/listing/1')
+
+      expect(response.status).to eq 200
+      expect(response.body).to include '<h1>Listing Name</h1>'
+    end
+  end
 end
