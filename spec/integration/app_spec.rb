@@ -3,6 +3,7 @@ require "rack/test"
 require_relative '../../app'
 require 'json'
 
+
 describe Application do
   # This is so we can use rack-test helper methods.
   include Rack::Test::Methods
@@ -37,7 +38,8 @@ describe Application do
       response = get('/listing/1')
 
       expect(response.status).to eq 200
-      expect(response.body).to include '<h1>Listing Name</h1>'
+      expect(response.body).to include ('h1>HollyWood Mansion</h1>')
     end
   end
+  
 end

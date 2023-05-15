@@ -3,16 +3,22 @@
     </head>
 
     <body>
-        <h1>Listing Name</h1>
-        <p>Location, Description, Price </p>
-
+     <img src='<%= @listing.img %>' alt='Nicolas Cage'>
+        <h1><%= @listing.title %></h1><br />
+        <p>
+           Location <%= @listing.location %><br />
+           Description <%= @listing.description %><br />
+           Price <%= @listing.price %><br />
+        
+         <h2>Booking Request</h2>
         <form action="/booking" method="POST">
-        <label>name</label>
+        <label>Name</label>
         <input type="text" name="name">
-        <label>comment</label>
+        <label>Comment</label>
         <input type="text" name="additional information">
-        <label>date</label>
+        <label>Date</label>
         <input type="text" name="date">
+         <input type="submit" name="Submit">
         </form>
         </p>
 

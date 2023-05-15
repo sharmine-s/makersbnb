@@ -10,17 +10,24 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  get "/" do
+
+
+
+
+  get '/' do
     repo = ListingRepository.new
     @listings = repo.all
     return erb(:index)
   end
 
-  get "/listing/:id" do
+  get '/listing/:id' do
+    repo = ListingRepository.new
+    @listing = repo.find(params[:id])
+  
     return erb(:listing)
   end
 
-  post "/booking/:id" do
+  post '/booking/:id' do
     @listing = ListingRepository.new
 
     return erb(:confirm)
