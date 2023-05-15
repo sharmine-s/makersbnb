@@ -1,8 +1,10 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require_relative './lib/listing_repository'
+require_relative './lib/database_connection'
 
+DatabaseConnection.connect
 
-DatabaseConnection.connect('makersbnb_test')
 class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
@@ -11,6 +13,8 @@ class Application < Sinatra::Base
 
 
   get '/' do
+    repo = ListingRepository.new
+    @listings = repo.all
     return erb(:index)
   end
 
@@ -21,3 +25,6 @@ class Application < Sinatra::Base
     return erb(:listing)
   end
 end
+
+
+

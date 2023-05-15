@@ -2,26 +2,23 @@
     <head>
     </head>
 
-    <body style="background-image: url('<%= @listing.img %>');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;">
-    
-        <h1><%= @listing.title %></h1>
+    <body>
+     <img src='<%= @listing.img %>' alt='Nicolas Cage'>
+        <h1><%= @listing.title %></h1><br />
         <p>
-           Location <%= @listing.location %>
-           Description <%= @listing.description %>
-           Price <%= @listing.price %>
-           Image <%= @listing.img %>
-        </p>
-
+           Location <%= @listing.location %><br />
+           Description <%= @listing.description %><br />
+           Price <%= @listing.price %><br />
+        
+         <h2>Booking Request</h2>
         <form action="/booking" method="POST">
-        <label>name</label>
+        <label>Name</label>
         <input type="text" name="name">
-        <label>comment</label>
+        <label>Comment</label>
         <input type="text" name="additional information">
-        <label>date</label>
+        <label>Date</label>
         <input type="text" name="date">
+         <input type="submit" name="Submit">
         </form>
         </p>
 

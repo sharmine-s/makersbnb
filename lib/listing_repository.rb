@@ -1,11 +1,22 @@
+require_relative 'listing'
+
 class ListingRepository
   def all
-  end
+    query = 'SELECT * FROM listings;'
+    result = DatabaseConnection.exec_params(query, [])
 
+    listings = []
+
+    result.each do |listing|
+      listings << create_listing_object(listing)
+    end
+
+    return listings
+  end
 
   def find(id)
     result_set = fetch_data(id)
-    build_listing(result_set.first)
+    create_listing_object(result_set.first)
   end
 
   private
@@ -15,20 +26,16 @@ class ListingRepository
     DatabaseConnection.exec_params(sql, [id])
   end
 
+  def create_listing_object(record)
+    listing = Listing.new
+    listing.id = record['id']
+    listing.title = record['title']
+    listing.description = record['description']
+    listing.img = record['img']
+    listing.price = record['price']
+    listing.location = record['location']
+    listing.user_id = record['user_id']
 
-
-  def build_listing(data)
-    Listing.new.tap do |listing|
-     listing.id = data['id'].to_i
-     listing.title = data['title']
-     listing.description= data['description']
-     listing.img= data['img']
-     listing.price= data['price']
-     listing.location= data['location']
-     listing.user_id = data['user_id']
-    end
-  end
-
-  def create
+    return listing
   end
 end
