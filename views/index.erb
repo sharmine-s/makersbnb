@@ -10,6 +10,23 @@
         <link rel="stylesheet" href="/style.css" >
     </head>
     <body>
-        <p>This is the homepage.</h1>
+        <h1>Welcome to MakersBnB</h1>
+
+        <% @listings.each do |listing| %>
+        <%= listing.title %>
+        <%= listing.description %>
+        <%= listing.location %>
+        <%= listing.price %>
+        <% end %>
+
+        <p>Penthouse Suite - North Hills</p>
+        <p>Location: Hollywood Hills</p>
+        <p> £500/night </p>
+        <a href='/listing/1'> See More </a>
+        <img src='https://robbreport.com/wp-content/uploads/2019/03/002-crop.jpg?w=1000' alt='Nicolas Cage'>
     </body>
 </html>
+
+<!--
+
+-->

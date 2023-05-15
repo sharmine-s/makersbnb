@@ -11,8 +11,13 @@ require 'rainbow/refinement'
 class DatabaseConnection
   using Rainbow
 
-  def self.connect(database_name)
-    @host = '127.0.0.1'
+  def self.connect
+    if ENV['ENV'] == 'test'
+      database_name = 'makersbnb_test'
+    else
+      database_name = 'makersbnb'
+    end
+    @connection = PG.connect({ host: '127.0.0.1', dbname: database_name })
     @database_name = database_name
     puts "Connecting to database `#{@database_name}`...".blue unless test_mode?
 
@@ -25,7 +30,6 @@ class DatabaseConnection
       exit
     end
 
-    @connection = PG.connect({ host: @host, dbname: @database_name })
     puts "Connected to the database successfully.".green unless test_mode?
   rescue PG::Error => e
     exit_with_helpful_connection_message(e)
