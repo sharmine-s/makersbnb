@@ -13,16 +13,13 @@
         <h1>Welcome to MakersBnB</h1>
 
         <% @listings.each do |listing| %>
+        <br>
         <%= listing.title %> <br>
         <%= listing.description %> <br>
         <%= listing.location %> <br>
-        <%= listing.price %> <br>
-        <img src='<%=listing.img%>' alt='Under Hollywood Sign'>
-        <a href='/listing/<%=listing.id%>'> See More </a>
+        <%= listing.price %>/night <br>
+        <img src='<%=listing.img%>' alt='Under Hollywood Sign' width="500"> <br>
+        <a href='/listing/<%=listing.id%>'> See More </a> <br>
        <% end %>
     </body>
 </html>
-
-<!--
-
--->
