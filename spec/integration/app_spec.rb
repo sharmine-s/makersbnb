@@ -23,6 +23,10 @@ describe Application do
       response = get('/')
 
       expect(response.status).to eq(200)
+      expect(response.body).to include("<h1>Welcome to MakersBnB</h1>")
+      expect(response.body).to include("<p>Location: Hollywoods Hills</p>")
+      expect(response.body).to include("<p>Penthouse Suite - North Hills</p>")
+      expect(response.body).to include("<a href='/listing/1'> See More </a>")      
     end
   end
 end

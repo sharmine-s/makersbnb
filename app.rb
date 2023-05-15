@@ -10,3 +10,12 @@ class Application < Sinatra::Base
     return erb(:index)
   end
 end
+
+=begin IMPLIMENT WHEN DATABASE ADDED
+<% @listings.each do |listing| %>
+<%= listing.title %>
+<%= listing.description %>
+<%= listing.location %>
+<%= listing.price %>
+<% end %>
+=end
