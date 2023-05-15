@@ -12,6 +12,13 @@
     <body>
         <h1>Welcome to MakersBnB</h1>
 
+        <% @listings.each do |listing| %>
+        <%= listing.title %>
+        <%= listing.description %>
+        <%= listing.location %>
+        <%= listing.price %>
+        <% end %>
+
         <p>Penthouse Suite - North Hills</p>
         <p>Location: Hollywood Hills</p>
         <p> £500/night </p>

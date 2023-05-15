@@ -7,6 +7,7 @@ class Application < Sinatra::Base
   end
 
   get '/' do
+    
     return erb(:index)
   end
 
@@ -15,11 +16,5 @@ class Application < Sinatra::Base
   end
 end
 
-=begin IMPLIMENT WHEN DATABASE ADDED
-<% @listings.each do |listing| %>
-<%= listing.title %>
-<%= listing.description %>
-<%= listing.location %>
-<%= listing.price %>
-<% end %>
-=end
+
+
