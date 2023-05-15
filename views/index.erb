@@ -13,17 +13,13 @@
         <h1>Welcome to MakersBnB</h1>
 
         <% @listings.each do |listing| %>
-        <%= listing.title %>
-        <%= listing.description %>
-        <%= listing.location %>
-        <%= listing.price %>
-        <% end %>
-
-        <p>Penthouse Suite - North Hills</p>
-        <p>Location: Hollywood Hills</p>
-        <p> £500/night </p>
-        <a href='/listing/1'> See More </a>
-        <img src='https://robbreport.com/wp-content/uploads/2019/03/002-crop.jpg?w=1000' alt='Nicolas Cage'>
+        <%= listing.title %> <br>
+        <%= listing.description %> <br>
+        <%= listing.location %> <br>
+        <%= listing.price %> <br>
+        <img src='<%=listing.img%>' alt='Under Hollywood Sign'>
+        <a href='/listing/<%=listing.id%>'> See More </a>
+       <% end %>
     </body>
 </html>
 
