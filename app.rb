@@ -34,4 +34,8 @@ class Application < Sinatra::Base
     return erb(:confirm)
   end
 
+  get '/new_listing' do
+    return erb(:new_listing)
+  end
+
 end
