@@ -20,3 +20,15 @@ CREATE TABLE IF NOT EXISTS dates (
   guest_id int,
   confirmed boolean
 );
+CREATE TABLE IF NOT EXISTS dates (
+  id SERIAL PRIMARY KEY,
+  name text,
+  username text,
+  
+  listing_id int,
+    constraint fk_listing foreign key(listing_id) references listings(id) on delete cascade,
+  date date,
+  requested boolean,
+  guest_id int,
+  confirmed boolean
+);
