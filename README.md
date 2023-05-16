@@ -25,3 +25,6 @@ rspec
 # Run the server (better to do this in a separate terminal).
 rackup
 ```
+
+## Dates Table
+When calling the `create`
