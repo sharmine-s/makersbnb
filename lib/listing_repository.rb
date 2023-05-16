@@ -14,6 +14,14 @@ class ListingRepository
     return listings
   end
 
+  def create(listing)
+    sql = 'INSERT INTO listings (title, description, img, price, location, user_id) VALUES ($1, $2, $3, $4, $5, $6);'
+    sql_params = [listing.title, listing.description, listing.img, listing.price, listing.location, listing.user_id]
+    DatabaseConnection.exec_params(sql, sql_params)
+    
+    return nil
+  end
+
   def find(id)
     result_set = fetch_data(id)
     create_listing_object(result_set.first)
