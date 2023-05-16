@@ -41,5 +41,13 @@ describe Application do
       expect(response.body).to include ('h1>HollyWood Mansion</h1>')
     end
   end
-  
+
+  context 'POST /booking/:id' do
+    it 'should redirect to booking confirmation page with details of booking' do
+      response = post('/booking/1')
+
+      expect(response.status).to eq 200
+      expect(response.body).to include ('<h1>Your booking is being reviewed</h1>')
+    end
+  end
 end

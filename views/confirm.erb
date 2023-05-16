@@ -13,7 +13,12 @@
         <h1>Your booking is being reviewed</h1>
         <a href="/"><button type="button">Go back Main Page</button></a>
 
-        <p>You have booked a house for the price of</p>
+        <p> <h2><%= @listing.title %></h2><br />
+           <%= @listing.location %><br />
+           <%= @listing.description %><br />
+           <%= @listing.price %><br />
+          <img src='<%= @listing.img %>' alt='Nicolas Cage'>
+        </p>
 
 
 
