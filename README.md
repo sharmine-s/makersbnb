@@ -25,3 +25,11 @@ rspec
 # Run the server (better to do this in a separate terminal).
 rackup
 ```
+
+## Dates Table
+When calling the `create` method for any date ensure that `requested` is false and `guest_id` and `confirmed` are null.
+To ensure that each listing is unique make sure that `date` and `listing` are not the same in an existing entry.
+Be aware of the date format we are using which is 'YYYY-MM-DD'.
+
+When a request is made using the `update` method the `requested` must be updated to true and that `user_id` and `confirmed` should be given appropriate values. Such as, 1 and false, respectively.
+Once a booking is confirmed false must be updated to true. 
