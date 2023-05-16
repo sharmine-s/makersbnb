@@ -23,9 +23,10 @@ class Application < Sinatra::Base
     return erb(:listing)
   end
 
-  post '/booking' do
-    @listing = ListingRepository.new
-
+  post '/booking/:id' do
+    repo = ListingRepository.new
+    @listing = repo.find(params[:id])
+    
     return erb(:confirm)
   end
 
@@ -49,4 +50,5 @@ class Application < Sinatra::Base
     @listing_img = space.img
     return erb(:new_listing_confirmed)
   end
+
 end

@@ -42,7 +42,6 @@ describe Application do
     end
   end
 
-
   context 'GET /new_listing' do
     it 'should return a form to create a new listing' do
      response = get('/new_listing')
@@ -88,6 +87,14 @@ describe Application do
       expect(response.status).to eq(200)
       expect(homepage_response.body).to include('London Mansion')
       expect(homepage_response.body).to include('A beautiful mansion right under the hollywood sign in London')
+
+  context 'POST /booking/:id' do
+    it 'should redirect to booking confirmation page with details of booking' do
+      response = post('/booking/1')
+
+      expect(response.status).to eq 200
+      expect(response.body).to include ('<h1>Your booking is being reviewed</h1>')
+
     end
   end
 end

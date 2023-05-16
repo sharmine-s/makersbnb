@@ -1,3 +1,6 @@
+DROP TABLE dates;
+DROP TABLE listings;
+
 CREATE TABLE IF NOT EXISTS listings (
   id SERIAL PRIMARY KEY,
   title text,
@@ -6,4 +9,14 @@ CREATE TABLE IF NOT EXISTS listings (
   price money,
   location text,
   user_id int
+);
+
+CREATE TABLE IF NOT EXISTS dates (
+  id SERIAL PRIMARY KEY,
+  listing_id int,
+    constraint fk_listing foreign key(listing_id) references listings(id) on delete cascade,
+  date date,
+  requested boolean,
+  guest_id int,
+  confirmed boolean
 );
