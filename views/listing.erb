@@ -17,14 +17,15 @@
        <img src='<%= @listing.img %>' alt='Nicolas Cage'>
      
          <h2>Booking Request</h2>
-        <form action="/booking" method="POST">
-        <label>Name</label>
-        <input type="text" name="name">
-        <label>Comment</label>
-        <input type="text" name="additional information">
-        <label>Date</label>
-        <input type="text" name="date">
-         <input type="submit" name="Submit">
+        <form action="/booking/<%=@listing.id%>" method="POST">
+            <label>Name:</label>
+            <input type="text" name="name">
+            <label>Comment:</label>
+            <input type="text" name="additional information">
+            <label>Pick a date:</label>
+            <input type="date" name="Available Dates">
+       
+            <input type="submit" name="Submit">
         </form>
     </p>
 
