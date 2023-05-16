@@ -68,7 +68,7 @@ describe Application do
 
      expect(response.status).to eq(200)
      expect(response.body).to include('Listing confirmed: London Mansion')
+     expect(response.body).to include("<a href='/'> <button type")
     end
   end
-  
 end

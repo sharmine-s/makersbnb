@@ -10,10 +10,6 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
-
-
-
-
   get '/' do
     repo = ListingRepository.new
     @listings = repo.all
@@ -37,4 +33,7 @@ class Application < Sinatra::Base
     return erb(:new_listing)
   end
 
+  post '/new_listing' do 
+    return erb(:new_listing_confirmed)
+  end
 end
