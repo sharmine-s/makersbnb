@@ -33,3 +33,6 @@ Be aware of the date format we are using which is 'YYYY-MM-DD'.
 
 When a request is made using the `update` method the `requested` must be updated to true and that `user_id` and `confirmed` should be given appropriate values. Such as, 1 and false, respectively.
 Once a booking is confirmed false must be updated to true. 
+
+## User Table
+when working with the user table note that the listing table depends on the user table and the  dates table relies on the user and the listings tables.
