@@ -92,4 +92,9 @@ class Application < Sinatra::Base
     end
   end
 
+  get '/logout' do
+    session[:user_id] = nil
+    return redirect('/')
+  end
+
 end
