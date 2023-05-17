@@ -2,6 +2,7 @@ require "sinatra/base"
 require "sinatra/reloader"
 require_relative "./lib/listing_repository"
 require_relative "./lib/database_connection"
+require_relative "./lib/user_repository"
 
 DatabaseConnection.connect
 
@@ -70,6 +71,11 @@ class Application < Sinatra::Base
       status 400
       return 'Email and password do not match. Please go back and try again'
     end
+  end
+
+  get '/logout' do
+    session[:user_id] = nil
+    return redirect('/')
   end
 
 end
