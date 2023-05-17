@@ -3,6 +3,9 @@ require_relative '../lib/user_repository'
 require_relative '../lib/user'
 require_relative './spec_helper'
 require 'bcrypt'
+require 'rack/test'
+require 'json'
+
 
 describe UserRepository do
   before(:each) do 
@@ -22,5 +25,15 @@ describe UserRepository do
     expect(repo.all.last.username).to eq 'strange'
   end
 end
+
+  context 'find_by_email' do
+    it 'returns user object with given email' do 
+      repo = UserRepository.new
+      result = repo.find_by_email('john1@smith')
+
+      expect(result.name).to eq('john smith')
+      expect(result.username).to eq('user1')
+    end
+  end
 
 end
