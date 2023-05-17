@@ -14,12 +14,12 @@
         </ul>
         </nav>
 
-        <h1><%= @listing.title %></h1><br />
-        <p>
-            <%= @listing.location %><br />
-            <%= @listing.description %><br />
-            <%= @listing.price %><br />
-            <img src='<%= @listing.img %>' alt='Nicolas Cage'>
+     <h1><%= @listing.title %></h1><br />
+     <p>
+        <%= @listing.location %><br />
+        <%= @listing.description %><br />
+        <%= @listing.price %>/night<br />
+       <img src='<%= @listing.img %>' alt='Nicolas Cage'>
      
         <h2>Booking Request</h2>
         <form action="/booking/<%=@listing.id%>" method="POST">
