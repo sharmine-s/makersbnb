@@ -11,11 +11,11 @@ class UserRepository
      users << create_user_object(record)
      end
    return users
-   end
+  end
   def create(user)
     encrypted = BCrypt::Password.create(user.password)
     sql = 'INSERT INTO users (name, username, password, email) VALUES ($1,$2, $3, $4)'
-    params = [user.name, user.username, user.password, user.email]
+    params = [user.name, user.username, encrypted, user.email]
     DatabaseConnection.exec_params(sql, params)
     return nil
   end

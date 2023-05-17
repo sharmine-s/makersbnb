@@ -3,6 +3,7 @@ require "sinatra/reloader"
 require 'bcrypt'
 require_relative "./lib/listing_repository"
 require_relative "./lib/database_connection"
+require_relative "./lib/user_repository"
 
 DatabaseConnection.connect
 
