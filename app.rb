@@ -34,8 +34,6 @@ class Application < Sinatra::Base
     return erb(:new_listing)
   end
 
-<<<<<<< HEAD
-=======
   post '/new_listing' do 
     repo = ListingRepository.new
     space = Listing.new
@@ -53,5 +51,22 @@ class Application < Sinatra::Base
     return erb(:new_listing_confirmed)
   end
 
->>>>>>> ab386bbd58f6af01ee4ad9fe93d93640643c7f08
+  get '/signup' do
+    return erb(:signup)
+  end 
+
+  post '/signup' do 
+    name = params[:name]
+    @username = params[:username]
+    @email = params[:email]
+    password = params[:password]
+    
+    new_user = User.new
+    new_user.name = name
+    new_user.username = @username
+    new_user.email = @email 
+    new_user.password = password
+    UserRepository.new.create(new_user)
+    return erb(:account_created)
+  end
 end
