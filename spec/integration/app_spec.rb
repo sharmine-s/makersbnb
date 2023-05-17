@@ -128,4 +128,17 @@ describe Application do
     end
   end 
 
+  context 'GET /logout' do
+    it 'logs user out' do
+      post('/login', email: 'john1@smith', password: 'password1')
+      
+      logout = get('/logout')
+      expect(logout.status).to eq(302)
+
+      response = get('/')
+      expect(response.body).to include '<a href="/login"><button>Login</button></a>'
+    end
+  end
+
+
 end
