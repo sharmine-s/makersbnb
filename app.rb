@@ -6,6 +6,8 @@ require_relative "./lib/database_connection"
 DatabaseConnection.connect
 
 class Application < Sinatra::Base
+  enable :sessions
+
   configure :development do
     register Sinatra::Reloader
   end
@@ -56,7 +58,18 @@ class Application < Sinatra::Base
   end
 
   post '/login' do
+    repo = UserRepository.new
     email = params[:email]
+    password = params[:password]
+
+    if repo.sign_in(email, password) == true
+      @user = repo.find_by_email(email)
+      session[:user_id] = @user.id
+      return erb(:login_success)
+    else
+      status 400
+      return 'Email and password do not match. Please go back and try again'
+    end
   end
 
 end

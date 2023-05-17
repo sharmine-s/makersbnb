@@ -18,6 +18,25 @@ class UserRepository
 
     end
 
+    def sign_in(email, submitted_password)
+        user = find_by_email(email)
+    
+        return nil if user.nil?
+        
+        # encrypted version:
+        # stored_password = BCrypt::Password.new(user.password)
+        # return true if stored_password == submitted_password
+    
+        # return false
+
+        stored_password = user.password
+
+        return true if stored_password == submitted_password
+    
+        return false
+    end
+    
+
     private
 
     def create_user_object(record)

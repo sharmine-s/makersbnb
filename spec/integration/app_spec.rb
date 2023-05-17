@@ -123,7 +123,7 @@ describe Application do
       response = post('/login', email: 'john1@smith', password: 'password1')
 
       expect(response.status).to eq 200
-      expect(response.body).to include '<h1>Welcome, john</h1>'
+      expect(response.body).to include '<h1>Welcome, john smith</h1>'
       expect(response.body).to include 'You have succesfully be logged in'
     end
   end 
