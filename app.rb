@@ -55,4 +55,8 @@ class Application < Sinatra::Base
     return erb(:login)
   end
 
+  post '/login' do
+    email = params[:email]
+  end
+
 end
