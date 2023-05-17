@@ -10,10 +10,6 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
-
-
-
-
   get '/' do
     repo = ListingRepository.new
     @listings = repo.all
@@ -38,4 +34,24 @@ class Application < Sinatra::Base
     return erb(:new_listing)
   end
 
+<<<<<<< HEAD
+=======
+  post '/new_listing' do 
+    repo = ListingRepository.new
+    space = Listing.new
+
+    space.title = params[:title]
+    space.description = params[:description]
+    space.img = params[:img]
+    space.price = params[:price]
+    space.location = params[:location]
+    space.user_id = params[:user_id]
+    @listing = repo.create(space)
+
+    @listing_title = space.title
+    @listing_img = space.img
+    return erb(:new_listing_confirmed)
+  end
+
+>>>>>>> ab386bbd58f6af01ee4ad9fe93d93640643c7f08
 end
