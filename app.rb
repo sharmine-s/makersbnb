@@ -51,4 +51,8 @@ class Application < Sinatra::Base
     return erb(:new_listing_confirmed)
   end
 
+  get '/login' do
+    return erb(:login)
+  end
+
 end
