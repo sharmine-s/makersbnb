@@ -8,15 +8,20 @@
     </head>
 
     <body>
+        <nav>
+        <ul>
+        <a href="/">Home</a></li>
+        </ul>
+        </nav>
 
-     <h1><%= @listing.title %></h1><br />
-     <p>
-        <%= @listing.location %><br />
-        <%= @listing.description %><br />
-        <%= @listing.price %><br />
-       <img src='<%= @listing.img %>' alt='Nicolas Cage'>
+        <h1><%= @listing.title %></h1><br />
+        <p>
+            <%= @listing.location %><br />
+            <%= @listing.description %><br />
+            <%= @listing.price %><br />
+            <img src='<%= @listing.img %>' alt='Nicolas Cage'>
      
-         <h2>Booking Request</h2>
+        <h2>Booking Request</h2>
         <form action="/booking/<%=@listing.id%>" method="POST">
             <label>Name:</label>
             <input type="text" name="name">
@@ -27,9 +32,7 @@
        
             <input type="submit" name="Submit">
         </form>
-    </p>
-
-        <a href="/"><button type="button">Go back Main Page</button></a>
+        </p>
 
     </body>
 </html>
