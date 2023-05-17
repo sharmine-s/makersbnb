@@ -99,4 +99,11 @@ describe Application do
 
     end
   end
+
+  context 'POST /listing/:id' do 
+    it 'sends the booking request information to the server' do
+       
+
+    end
+  end
 end
