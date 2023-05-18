@@ -29,9 +29,9 @@ end
   context 'find_by_email' do
     it 'returns user object with given email' do 
       repo = UserRepository.new
-      result = repo.find_by_email('john1@smith')
+      result = repo.find_by_email('john1@smith.com')
 
-      expect(result.name).to eq('john smith')
+      expect(result.name).to eq('John Smith')
       expect(result.username).to eq('user1')
     end
   end
