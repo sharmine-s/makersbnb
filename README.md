@@ -27,12 +27,16 @@ rackup
 ```
 
 ## Dates Table
-When calling the `create` method for any date ensure that `requested` is false and `guest_id` and `confirmed` are null.
+When calling the `create` method for any date ensure that `guest_id` is null, as this gets populated only once the booking has been confirmed.
+
 To ensure that each listing is unique make sure that `date` and `listing` are not the same in an existing entry.
 Be aware of the date format we are using which is 'YYYY-MM-DD'.
 
-When a request is made using the `update` method the `requested` must be updated to true and that `user_id` and `confirmed` should be given appropriate values. Such as, 1 and false, respectively.
-Once a booking is confirmed false must be updated to true. 
+## Requests Table
+When a request is made a new request record is added into the table. 
+Once a request is confirmed, delete that request from the table.
+A request table only contains pending requests. 
+
 
 ## User Table
 when working with the user table note that the listing table depends on the user table and the  dates table relies on the user and the listings tables.

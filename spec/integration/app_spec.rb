@@ -150,17 +150,17 @@ describe Application do
 
   context 'POST /login' do
     it 'logs a user in with correct password and email' do
-      response = post('/login', email: 'john1@smith', password: 'password1')
+      response = post('/login', email: 'john1@smith.com', password: 'password1')
 
       expect(response.status).to eq 200
-      expect(response.body).to include '<h1>Welcome, john smith</h1>'
+      expect(response.body).to include '<h1>Welcome, John Smith</h1>'
       expect(response.body).to include 'You have succesfully be logged in'
     end
   end 
 
   context 'GET /logout' do
     it 'logs user out' do
-      post('/login', email: 'john1@smith', password: 'password1')
+      post('/login', email: 'john1@smith.com', password: 'password1')
       
       logout = get('/logout')
       expect(logout.status).to eq(302)
