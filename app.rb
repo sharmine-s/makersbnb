@@ -1,5 +1,6 @@
 require "sinatra/base"
 require "sinatra/reloader"
+require 'bcrypt'
 require_relative "./lib/listing_repository"
 require_relative "./lib/database_connection"
 require_relative "./lib/user_repository"
@@ -37,8 +38,6 @@ class Application < Sinatra::Base
     return erb(:new_listing)
   end
 
-<<<<<<< HEAD
-=======
   post '/new_listing' do 
     repo = ListingRepository.new
     space = Listing.new
@@ -56,6 +55,24 @@ class Application < Sinatra::Base
     return erb(:new_listing_confirmed)
   end
 
+  get '/signup' do
+    return erb(:signup)
+  end 
+
+  post '/signup' do 
+    name = params[:name]
+    @username = params[:username]
+    @email = params[:email]
+    password = params[:password]
+    
+    new_user = User.new
+    new_user.name = name
+    new_user.username = @username
+    new_user.email = @email 
+    new_user.password = password
+    UserRepository.new.create(new_user)
+    return erb(:account_created)
+  end
   get '/login' do
     return erb(:login)
   end

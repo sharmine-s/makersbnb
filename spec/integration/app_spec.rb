@@ -110,6 +110,32 @@ describe Application do
     end
   end
 
+  context 'GET /signup' do
+    it 'should return a form to create a new user' do
+      response = get('/signup')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Sign Up with MakersBnB')
+      expect(response.body).to include('<title>Sign up</title>')
+      expect(response.body).to include('<label>Name </label>')
+      expect(response.body).to include('form action="/signup" method="POST"')
+     end
+  end
+
+
+  context 'POST /signup' do
+    it 'confirm the account has been created' do
+     response = post(
+      '/signup',
+      name: 'John', 
+      username: 'john1', 
+      password: 'password1',
+      email: 'john@gmail.com'
+    )
+
+     expect(response.status).to eq(200)
+     expect(response.body).to include(" <h1> SUCCESS </h1>")
+     end
+    end 
   context 'GET /login' do
     it 'shows login form' do
         response = get('/login')
