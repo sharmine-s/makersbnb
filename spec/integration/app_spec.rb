@@ -48,6 +48,8 @@ describe Application do
     end
   end
 
+
+
   context 'GET /new_listing' do
     it 'should return a form to create a new listing' do
      response = get('/new_listing')
@@ -74,7 +76,8 @@ describe Application do
      expect(response.status).to eq(200)
      expect(response.body).to include('Listing confirmed: London Mansion')
      expect(response.body).to include("<a href='/'> <button type")
-    end
+     end
+    end 
 
 
     it 'shows the new listing on the homepage' do
@@ -94,8 +97,9 @@ describe Application do
       expect(homepage_response.body).to include('London Mansion')
       expect(homepage_response.body).to include('A beautiful mansion right under the hollywood sign in London')
     end
-  end
   
+  
+
   context 'POST /booking/:id' do
     it 'should redirect to booking confirmation page with details of booking' do
       response = post('/booking/1')
@@ -106,6 +110,32 @@ describe Application do
     end
   end
 
+  context 'GET /signup' do
+    it 'should return a form to create a new user' do
+      response = get('/signup')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Sign Up with MakersBnB')
+      expect(response.body).to include('<title>Sign up</title>')
+      expect(response.body).to include('<label>Name </label>')
+      expect(response.body).to include('form action="/signup" method="POST"')
+     end
+  end
+
+
+  context 'POST /signup' do
+    it 'confirm the account has been created' do
+     response = post(
+      '/signup',
+      name: 'John', 
+      username: 'john1', 
+      password: 'password1',
+      email: 'john@gmail.com'
+    )
+
+     expect(response.status).to eq(200)
+     expect(response.body).to include(" <h1> SUCCESS </h1>")
+     end
+    end 
   context 'GET /login' do
     it 'shows login form' do
         response = get('/login')
