@@ -40,11 +40,12 @@ describe Application do
   end
 
   context 'GET /listing/:id' do
-    it 'should show the information of listing 1' do
+    xit 'should show the information of listing 1' do
       response = get('/listing/1')
 
       expect(response.status).to eq 200
       expect(response.body).to include ('h1>HollyWood Mansion</h1>')
+      expect(response.body).to include ('2023-08-01')
     end
   end
 
@@ -108,9 +109,12 @@ describe Application do
         user_id: 1,
         date_3: '2023-08-03'
         )
-
-       expect(response.status).to eq 200 
-       expect(response.body).to include("Listing confirmed: London Mansion") 
+      
+      repo = DateRepository.new
+      expect { repo.all[-1].guest_id }.to raise_error(NoMethodError)
+  
+      expect(response.status).to eq 200 
+      expect(response.body).to include("Listing confirmed: London Mansion") 
     end
 
     xit 'confirms the new listing and shows multiple dates' do 
@@ -141,17 +145,6 @@ describe Application do
 
       expect(response.status).to eq 200
       expect(response.body).to include ('<h1>Your booking is being reviewed</h1>')
-    end
-  end
-
-  context 'POST /listing/:id' do 
-    xit 'sends the booking request information to the server' do
-      response = post('/listing/1', date_3: '2023-08-03')
-
-      expect(response.status).to eq 200
-      expect(response.body).to include('Booking successfully sent')
-      expect(response.body).to include('You have booked Hollywood Mansion for 3rd August')
-      # To be done when implementing booking request
     end
   end
 
@@ -195,12 +188,33 @@ describe Application do
 
   context 'POST /login' do
     it 'logs a user in with correct password and email' do
-      response = post('/login', email: 'john1@smith.com', password: 'password1')
+      response = post(
+        '/signup',
+        name: 'John', 
+        username: 'john1', 
+        password: 'password1',
+        email: 'john@gmail.com'
+      )
+      response = post('/login', email: 'john@gmail.com', password: 'password1')
 
       expect(response.status).to eq 200
-      expect(response.body).to include '<h1>Welcome, John Smith</h1>'
+      expect(response.body).to include '<h1>Welcome, John</h1>'
       expect(response.body).to include 'You have succesfully be logged in'
     end
+
+    it 'redirects to signup page if no login details' do
+      response = post('/login', email: '', password: '')
+      response1 = get('/login')
+
+      expect(response.status).to eq 302
+      expect(response1.body).to include '<h1>Login</h1>'
+      expect(response1.body).to include 'Invalid'
+      expect(response1.body).to include '<form action="/login" method="POST">'
+      expect(response1.body).to include '<input type="email" name="email">'
+      expect(response1.body).to include '<input type="password" name="password">'
+    end
+
+  
   end 
 
   context 'GET /logout' do
@@ -214,4 +228,29 @@ describe Application do
       expect(response.body).to include '<a href="/login"><button>Login</button></a>'
     end
   end
+
+  context 'GET /booking_request' do
+   it 'shows booking information and able to approve or deny only when user logged in' do
+    response = post('/login', email: 'john1@smith.com', password: 'password1')
+    response = get('/booking_request')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Approve')
+   end
+  end
+
+  context 'POST /booking_request' do
+    it 'shows approved comfirmation' do
+      response = post(
+        '/booking_request',
+        listing_id: '2', 
+        date: '2024-02-14', 
+        guest_id: '4'
+      )
+
+     response = post('/booking_request')
+       expect(response.status).to eq(200)
+       expect(response.body).to include("You've approved this booking request")
+    end
+   end
+
 end

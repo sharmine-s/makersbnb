@@ -1,6 +1,7 @@
 require "sinatra/base"
 require "sinatra/reloader"
 require 'bcrypt'
+require 'sinatra/flash'
 require_relative "./lib/listing_repository"
 require_relative "./lib/database_connection"
 require_relative "./lib/user_repository"
@@ -10,9 +11,12 @@ DatabaseConnection.connect
 
 class Application < Sinatra::Base
   enable :sessions
+  # enable Sinatra::Flash
+  register Sinatra::Flash
 
   configure :development do
     register Sinatra::Reloader
+    
   end
 
   get '/' do
@@ -67,7 +71,6 @@ class Application < Sinatra::Base
     selected_dates.each do |date|
       new_date.listing_id = new_repo_list[-1].id
       new_date.date = date
-      new_date.guest_id = session[:user_id]
       repo_date.create(new_date)
     end
 
@@ -106,14 +109,25 @@ class Application < Sinatra::Base
       session[:user_id] = @user.id
       return erb(:login_success)
     else
-      status 400
-      return 'Email and password do not match. Please go back and try again'
+      flash[:error] = 'Invalid email or password'
+      return redirect '/login'
     end
   end
 
   get '/logout' do
     session[:user_id] = nil
     return redirect('/')
+  end
+
+
+  get '/booking_request' do
+    repo = ListingRepository.new
+    @listing = repo.find(1)
+    return erb(:booking_request)
+  end
+
+  post '/booking_request' do
+    return erb(:booking_confirm)
   end
 
 end

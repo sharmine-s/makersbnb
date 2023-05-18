@@ -12,6 +12,7 @@ class UserRepository
      end
    return users
   end
+  
   def create(user)
     encrypted = BCrypt::Password.create(user.password)
     sql = 'INSERT INTO users (name, username, email, password) VALUES ($1,$2, $3, $4)'
@@ -31,9 +32,12 @@ class UserRepository
 
     result = DatabaseConnection.exec_params(sql, sql_params)
 
-    record = result[0]
-
-    return create_user_object(record)
+    if !result.ntuples.zero?
+        record = result[0]
+        return create_user_object(record)
+    else
+        return nil
+    end
 
   end
 
@@ -42,15 +46,14 @@ def sign_in(email, submitted_password)
 
     return nil if user.nil?
     
-    # encrypted version:
-    # stored_password = BCrypt::Password.new(user.password)
-    # return true if stored_password == submitted_password
+    stored_password = BCrypt::Password.new(user.password)
+    return true if stored_password == submitted_password
 
     # return false
 
-    stored_password = user.password
+    # stored_password = user.password
 
-    return true if stored_password == submitted_password
+    # return true if stored_password == submitted_password
 
     return false
 end
