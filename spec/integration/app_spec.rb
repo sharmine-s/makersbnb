@@ -40,7 +40,7 @@ describe Application do
   end
 
   context 'GET /listing/:id' do
-    xit 'should show the information of listing 1' do
+    it 'should show the information of listing 1' do
       response = get('/listing/1')
 
       expect(response.status).to eq 200

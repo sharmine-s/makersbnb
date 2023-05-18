@@ -28,6 +28,7 @@ class Application < Sinatra::Base
   get '/listing/:id' do
     repo = ListingRepository.new
     @listing = repo.find(params[:id])
+    @available_dates = repo.find_listing_id(@listing.id)
   
     return erb(:listing)
   end

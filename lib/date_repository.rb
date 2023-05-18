@@ -32,6 +32,21 @@ class DateRepository
         create_date_object(result_set.first)
     end
 
+    def find_listing_id(listing_id)
+        sql = 'SELECT * FROM dates WHERE listing_id = $1;'
+        sql_params = listing_id
+        result = DatabaseConnection.exec_params(sql, sql_params)
+
+        dates = []
+
+        result.each do |record|
+            create_date_object(record)
+            dates << record
+        end
+
+        return dates
+    end
+
     private
         
     def fetch_data(id)
