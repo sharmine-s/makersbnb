@@ -4,7 +4,13 @@ require_relative '../../app'
 require 'json'
 
 
+
 describe Application do
+
+  before(:each) do 
+    reset_all_tables
+  end
+  
   # This is so we can use rack-test helper methods.
   include Rack::Test::Methods
 
@@ -103,4 +109,40 @@ describe Application do
 
     end
   end
+
+  context 'GET /login' do
+    it 'shows login form' do
+        response = get('/login')
+
+        expect(response.status).to eq 200
+        expect(response.body).to include '<h1>Login</h1>'
+        expect(response.body).to include '<form action="/login" method="POST">'
+        expect(response.body).to include '<input type="email" name="email">'
+        expect(response.body).to include '<input type="password" name="password">'
+    end
+  end  
+
+  context 'POST /login' do
+    it 'logs a user in with correct password and email' do
+      response = post('/login', email: 'john1@smith', password: 'password1')
+
+      expect(response.status).to eq 200
+      expect(response.body).to include '<h1>Welcome, john smith</h1>'
+      expect(response.body).to include 'You have succesfully be logged in'
+    end
+  end 
+
+  context 'GET /logout' do
+    it 'logs user out' do
+      post('/login', email: 'john1@smith', password: 'password1')
+      
+      logout = get('/logout')
+      expect(logout.status).to eq(302)
+
+      response = get('/')
+      expect(response.body).to include '<a href="/login"><button>Login</button></a>'
+    end
+  end
+
+
 end

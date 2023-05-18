@@ -2,10 +2,13 @@ require "sinatra/base"
 require "sinatra/reloader"
 require_relative "./lib/listing_repository"
 require_relative "./lib/database_connection"
+require_relative "./lib/user_repository"
 
 DatabaseConnection.connect
 
 class Application < Sinatra::Base
+  enable :sessions
+
   configure :development do
     register Sinatra::Reloader
   end
@@ -53,5 +56,28 @@ class Application < Sinatra::Base
     return erb(:new_listing_confirmed)
   end
 
->>>>>>> ab386bbd58f6af01ee4ad9fe93d93640643c7f08
+  get '/login' do
+    return erb(:login)
+  end
+
+  post '/login' do
+    repo = UserRepository.new
+    email = params[:email]
+    password = params[:password]
+
+    if repo.sign_in(email, password) == true
+      @user = repo.find_by_email(email)
+      session[:user_id] = @user.id
+      return erb(:login_success)
+    else
+      status 400
+      return 'Email and password do not match. Please go back and try again'
+    end
+  end
+
+  get '/logout' do
+    session[:user_id] = nil
+    return redirect('/')
+  end
+
 end
