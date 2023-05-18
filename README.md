@@ -27,7 +27,8 @@ rackup
 ```
 
 ## Dates Table
-When calling the `create` method for any date ensure that `requested` is false and `guest_id` and `confirmed` are null.
+When calling the `create` method for any date ensure that `guest_id` is null, as this gets populated only once the booking has been confirmed.
+
 To ensure that each listing is unique make sure that `date` and `listing` are not the same in an existing entry.
 Be aware of the date format we are using which is 'YYYY-MM-DD'.
 
