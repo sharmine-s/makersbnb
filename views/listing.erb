@@ -28,13 +28,8 @@
          <h2>Booking Request</h2>
         <form action="/booking/<%=@listing.id%>" method="POST">
             <label for>Pick a date:</label> <br>
+            <% @available_dates.each do | %>
             <button name="date1" value="true">1st of August</button>
-            <button name="date2" value="true">2nd of August</button>
-            <button name="date3" value="true">3rd of August</button>
-            <button name="date4" value="true">4th of August</button>
-            <button name="date5" value="true">5th of August</button>
-            <button name="date6" value="true">6th of August</button>
-            <button name="date7" value="true">7th of August</button>
        <br><br>
             <input type="submit" name="Submit">
 
