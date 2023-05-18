@@ -4,6 +4,7 @@ require 'bcrypt'
 require_relative "./lib/listing_repository"
 require_relative "./lib/database_connection"
 require_relative "./lib/user_repository"
+require_relative "./lib/date_repository"
 
 DatabaseConnection.connect
 
@@ -39,8 +40,10 @@ class Application < Sinatra::Base
   end
 
   post '/new_listing' do 
-    repo = ListingRepository.new
+    repo_list = ListingRepository.new
     space = Listing.new
+    repo_date = DateRepository.new
+    new_date = Date.new
 
     space.title = params[:title]
     space.description = params[:description]
@@ -48,10 +51,26 @@ class Application < Sinatra::Base
     space.price = params[:price]
     space.location = params[:location]
     space.user_id = params[:user_id]
-    @listing = repo.create(space)
-
+    
+    @listing = repo_list.create(space)
+    new_repo_list = ListingRepository.new.all
+    
     @listing_title = space.title
     @listing_img = space.img
+
+    available_dates = [params[:date_1], params[:date_2], 
+    params[:date_3], params[:date_4], params[:date_5], 
+    params[:date_6], params[:date_7]]
+
+    selected_dates = available_dates.select { |date| date != nil }
+    
+    selected_dates.each do |date|
+      new_date.listing_id = new_repo_list[-1].id
+      new_date.date = date
+      new_date.guest_id = session[:user_id]
+      repo_date.create(new_date)
+    end
+
     return erb(:new_listing_confirmed)
   end
 

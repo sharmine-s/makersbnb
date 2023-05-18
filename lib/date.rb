@@ -1,3 +1,3 @@
 class Date
-    attr_accessor :id, :listing_id, :date, :requested, :guest_id, :confirmed
+    attr_accessor :id, :listing_id, :date, :guest_id
 end
