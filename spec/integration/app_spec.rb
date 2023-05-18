@@ -146,7 +146,6 @@ describe Application do
     end
   end
 
-<<<<<<<<< Temporary merge branch 1
   context 'POST /listing/:id' do 
     it 'sends the booking request information to the server' do
       response = post('/listing/1', name: 'john smith', comment: 'I want to stay here', date_3: 'true')
@@ -156,7 +155,7 @@ describe Application do
       expect(response.body).to include('You have booked Hollywood Mansion for 3rd August')
     end
   end
-=========
+
   context 'GET /signup' do
     it 'should return a form to create a new user' do
       response = get('/signup')
@@ -216,7 +215,4 @@ describe Application do
       expect(response.body).to include '<a href="/login"><button>Login</button></a>'
     end
   end
-
-
->>>>>>>>> Temporary merge branch 2
 end
