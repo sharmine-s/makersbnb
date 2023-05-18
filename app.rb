@@ -1,6 +1,7 @@
 require "sinatra/base"
 require "sinatra/reloader"
 require 'bcrypt'
+require 'sinatra/flash'
 require_relative "./lib/listing_repository"
 require_relative "./lib/database_connection"
 require_relative "./lib/user_repository"
@@ -10,9 +11,12 @@ DatabaseConnection.connect
 
 class Application < Sinatra::Base
   enable :sessions
+  # enable Sinatra::Flash
+  register Sinatra::Flash
 
   configure :development do
     register Sinatra::Reloader
+    
   end
 
   get '/' do
@@ -105,8 +109,8 @@ class Application < Sinatra::Base
       session[:user_id] = @user.id
       return erb(:login_success)
     else
-      status 400
-      return 'Email and password do not match. Please go back and try again'
+      flash[:error] = 'Invalid email or password'
+      return redirect '/login'
     end
   end
 

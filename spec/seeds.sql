@@ -1,4 +1,4 @@
-DROP TABLE requests, listings, dates, requests;
+DROP TABLE users, listings, dates, requests;
 
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
