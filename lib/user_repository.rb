@@ -46,15 +46,14 @@ def sign_in(email, submitted_password)
 
     return nil if user.nil?
     
-    # encrypted version:
-    # stored_password = BCrypt::Password.new(user.password)
-    # return true if stored_password == submitted_password
+    stored_password = BCrypt::Password.new(user.password)
+    return true if stored_password == submitted_password
 
     # return false
 
-    stored_password = user.password
+    # stored_password = user.password
 
-    return true if stored_password == submitted_password
+    # return true if stored_password == submitted_password
 
     return false
 end
