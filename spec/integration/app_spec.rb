@@ -193,7 +193,7 @@ describe Application do
   end
 
   context 'GET /booking_request' do
-   it 'shows booking information and able to approve or deny' do
+   it 'shows booking information and able to approve or deny only when user logged in' do
     response = post('/login', email: 'john1@smith.com', password: 'password1')
     response = get('/booking_request')
       expect(response.status).to eq(200)
