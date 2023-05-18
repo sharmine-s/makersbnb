@@ -228,4 +228,29 @@ describe Application do
       expect(response.body).to include '<a href="/login"><button>Login</button></a>'
     end
   end
+
+  context 'GET /booking_request' do
+   it 'shows booking information and able to approve or deny only when user logged in' do
+    response = post('/login', email: 'john1@smith.com', password: 'password1')
+    response = get('/booking_request')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Approve')
+   end
+  end
+
+  context 'POST /booking_request' do
+    it 'shows approved comfirmation' do
+      response = post(
+        '/booking_request',
+        listing_id: '2', 
+        date: '2024-02-14', 
+        guest_id: '4'
+      )
+
+     response = post('/booking_request')
+       expect(response.status).to eq(200)
+       expect(response.body).to include("You've approved this booking request")
+    end
+   end
+
 end

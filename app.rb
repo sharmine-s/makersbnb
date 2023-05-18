@@ -119,4 +119,15 @@ class Application < Sinatra::Base
     return redirect('/')
   end
 
+
+  get '/booking_request' do
+    repo = ListingRepository.new
+    @listing = repo.find(1)
+    return erb(:booking_request)
+  end
+
+  post '/booking_request' do
+    return erb(:booking_confirm)
+  end
+
 end
