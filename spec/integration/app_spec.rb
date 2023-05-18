@@ -111,6 +111,8 @@ describe Application do
         )
 
        expect(response.status).to eq 200 
+       expect(response.body).to include("Your booking 'London Mansion' is being reviewed")
+       
 
     end
   end
