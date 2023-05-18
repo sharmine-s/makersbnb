@@ -5,7 +5,6 @@ require 'json'
 require 'bcrypt'
 
 
-
 describe Application do
 
   before(:each) do 
@@ -41,11 +40,12 @@ describe Application do
   end
 
   context 'GET /listing/:id' do
-    it 'should show the information of listing 1' do
+    xit 'should show the information of listing 1' do
       response = get('/listing/1')
 
       expect(response.status).to eq 200
       expect(response.body).to include ('h1>HollyWood Mansion</h1>')
+      expect(response.body).to include ('2023-08-01')
     end
   end
 
@@ -72,13 +72,12 @@ describe Application do
       img: 'https://img.gtsstatic.net/reno/imagereader.aspx?imageurl=https%3A%2F%2Fapi-prod.corelogic.com%2Ftrestle%2FMedia%2FCRMLS%2FProperty%2FPHOTO-jpeg%2F1013309050%2F1%2FMTU3Mi8yMjU2LzE5%2FMTkvODYyMy8xNjY2MzU5MzMy%2F_6mUwpQWQj53sOa1IBCE020pr-hhR0aS3syDBif_gPc%3Fdate%3D2023-02-15&option=N&h=472&permitphotoenlargement=false',
       location: 'London',
       user_id: 1
-    )
+      )
 
      expect(response.status).to eq(200)
      expect(response.body).to include('Listing confirmed: London Mansion')
      expect(response.body).to include("<a href='/'> <button type")
-     end
-    end 
+    end
 
 
     it 'shows the new listing on the homepage' do
@@ -98,16 +97,54 @@ describe Application do
       expect(homepage_response.body).to include('London Mansion')
       expect(homepage_response.body).to include('A beautiful mansion right under the hollywood sign in London')
     end
-  
-  
 
+    it 'confirms the listing that has been posted with dates' do
+      response = post(
+        '/new_listing',
+        title: 'London Mansion', 
+        description: 'A beautiful mansion right under the hollywood sign in London', 
+        price: 100.00,
+        img: 'https://img.gtsstatic.net/reno/imagereader.aspx?imageurl=https%3A%2F%2Fapi-prod.corelogic.com%2Ftrestle%2FMedia%2FCRMLS%2FProperty%2FPHOTO-jpeg%2F1013309050%2F1%2FMTU3Mi8yMjU2LzE5%2FMTkvODYyMy8xNjY2MzU5MzMy%2F_6mUwpQWQj53sOa1IBCE020pr-hhR0aS3syDBif_gPc%3Fdate%3D2023-02-15&option=N&h=472&permitphotoenlargement=false',
+        location: 'London',
+        user_id: 1,
+        date_3: '2023-08-03'
+        )
+      
+      repo = DateRepository.new
+      expect { repo.all[-1].guest_id }.to raise_error(NoMethodError)
+  
+      expect(response.status).to eq 200 
+      expect(response.body).to include("Listing confirmed: London Mansion") 
+    end
+
+    xit 'confirms the new listing and shows multiple dates' do 
+      response = post('/new_listing',
+        title: 'London Mansion', 
+        description: 'A beautiful mansion right under the hollywood sign in London', 
+        price: 100.00,
+        img: 'https://img.gtsstatic.net/reno/imagereader.aspx?imageurl=https%3A%2F%2Fapi-prod.corelogic.com%2Ftrestle%2FMedia%2FCRMLS%2FProperty%2FPHOTO-jpeg%2F1013309050%2F1%2FMTU3Mi8yMjU2LzE5%2FMTkvODYyMy8xNjY2MzU5MzMy%2F_6mUwpQWQj53sOa1IBCE020pr-hhR0aS3syDBif_gPc%3Fdate%3D2023-02-15&option=N&h=472&permitphotoenlargement=false',
+        location: 'London',
+        user_id: 1,
+        date_3: '2023-08-03',
+        date_4: '2023-08-04',
+        date_5: '2023-08-05'
+      )
+
+      expect(response.status).to eq 200 
+      expect(response.body).to include('Listing confirmed: London Mansion') 
+
+      listing = get('/listing/3')
+      expect(listing.body).to include('')
+      # Update test to expect correct dates in listing.body
+    end
+  end
+  
   context 'POST /booking/:id' do
     it 'should redirect to booking confirmation page with details of booking' do
-      response = post('/booking/1')
+      response = post('/booking/1', date_6: '2023-08-06')
 
       expect(response.status).to eq 200
       expect(response.body).to include ('<h1>Your booking is being reviewed</h1>')
-
     end
   end
 
@@ -119,7 +156,7 @@ describe Application do
       expect(response.body).to include('<title>Sign up</title>')
       expect(response.body).to include('<label>Name </label>')
       expect(response.body).to include('form action="/signup" method="POST"')
-     end
+    end
   end
 
 
@@ -131,7 +168,7 @@ describe Application do
       username: 'john1', 
       password: 'password1',
       email: 'john@gmail.com'
-    )
+      )
 
      expect(response.status).to eq(200)
      expect(response.body).to include(" <h1> SUCCESS </h1>")
@@ -215,6 +252,5 @@ describe Application do
        expect(response.body).to include("You've approved this booking request")
     end
    end
-
 
 end

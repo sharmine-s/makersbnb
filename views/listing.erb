@@ -27,14 +27,12 @@
      
          <h2>Booking Request</h2>
         <form action="/booking/<%=@listing.id%>" method="POST">
-            <label>Name:</label>
-            <input type="text" name="name">
-            <label>Comment:</label>
-            <input type="text" name="additional information">
-            <label>Pick a date:</label>
-            <input type="date" name="Available Dates">
-       
+            <label for>Pick a date:</label> <br>
+            <% %>
+            <button name="date1" value="true">1st of August</button>
+       <br><br>
             <input type="submit" name="Submit">
+
         </form>
     </p>
 
