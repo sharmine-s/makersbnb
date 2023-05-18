@@ -14,8 +14,8 @@ class UserRepository
   end
   def create(user)
     encrypted = BCrypt::Password.create(user.password)
-    sql = 'INSERT INTO users (name, username, password, email) VALUES ($1,$2, $3, $4)'
-    params = [user.name, user.username, encrypted, user.email]
+    sql = 'INSERT INTO users (name, username, email, password) VALUES ($1,$2, $3, $4)'
+    params = [user.name, user.username, user.email, encrypted]
     DatabaseConnection.exec_params(sql, params)
     return nil
   end
@@ -23,7 +23,7 @@ class UserRepository
 
   def find_by_email(email)
   
-    sql = 'SELECT id, name, username, password, email 
+    sql = 'SELECT id, name, username, password, email
             FROM users 
             WHERE email = $1;'
     

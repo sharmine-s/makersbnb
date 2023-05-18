@@ -1,6 +1,6 @@
-TRUNCATE TABLE users, listings, dates RESTART IDENTITY;
+TRUNCATE TABLE users, listings, dates, requests RESTART IDENTITY;
 
-INSERT INTO users(name, username, password, email) VALUES
+INSERT INTO users(name, username, email, password) VALUES
 ('John Smith', 'user1', 'john1@smith.com', 'password1'),
 ('John Smith', 'user2', 'john2@smith.com', 'password2'),
 ('Jane Doe', 'jdoe', 'jane@gmail.com', 'password3'),
