@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS requests (
   listing_id int,
     constraint fk_listing foreign key(listing_id) references listings(id) on delete cascade,
   date date,
+  confirmation boolean,
   guest_id int,
     constraint fk_user foreign key(guest_id) references users(id) on delete cascade
 );
