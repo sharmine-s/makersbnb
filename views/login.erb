@@ -4,7 +4,20 @@
         <title>Login</title>
         
     </head>
-    <body>	
+    <body>
+        <div class="navbar">
+            <% if session[:user_id] == nil %>
+            <a href="/login"><button>Login</button></a>
+            <a href="/signup"><button>Signup</button></a><br>
+            <% else %>
+            <a href="/logout"><button>Logout</button></a>
+            <%end%>
+            <a href="/"><button>Homepage</button></a>
+        </div>
+        
+        <% if flash[:error] %>
+            <%= flash[:error] %>
+        <% end %>
       <form action="/login" method="POST">
         <h1>Login</h1>  
 

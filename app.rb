@@ -1,15 +1,21 @@
 require "sinatra/base"
 require "sinatra/reloader"
+require 'bcrypt'
+require 'sinatra/flash'
 require_relative "./lib/listing_repository"
 require_relative "./lib/database_connection"
+require_relative "./lib/user_repository"
 
 DatabaseConnection.connect
 
 class Application < Sinatra::Base
   enable :sessions
+  # enable Sinatra::Flash
+  register Sinatra::Flash
 
   configure :development do
     register Sinatra::Reloader
+    
   end
 
   get '/' do
@@ -53,6 +59,24 @@ class Application < Sinatra::Base
     return erb(:new_listing_confirmed)
   end
 
+  get '/signup' do
+    return erb(:signup)
+  end 
+
+  post '/signup' do 
+    name = params[:name]
+    @username = params[:username]
+    @email = params[:email]
+    password = params[:password]
+    
+    new_user = User.new
+    new_user.name = name
+    new_user.username = @username
+    new_user.email = @email 
+    new_user.password = password
+    UserRepository.new.create(new_user)
+    return erb(:account_created)
+  end
   get '/login' do
     return erb(:login)
   end
@@ -67,9 +91,14 @@ class Application < Sinatra::Base
       session[:user_id] = @user.id
       return erb(:login_success)
     else
-      status 400
-      return 'Email and password do not match. Please go back and try again'
+      flash[:error] = 'Invalid email or password'
+      return redirect '/login'
     end
+  end
+
+  get '/logout' do
+    session[:user_id] = nil
+    return redirect('/')
   end
 
 end
