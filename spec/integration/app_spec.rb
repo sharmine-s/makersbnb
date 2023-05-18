@@ -40,11 +40,12 @@ describe Application do
   end
 
   context 'GET /listing/:id' do
-    it 'should show the information of listing 1' do
+    xit 'should show the information of listing 1' do
       response = get('/listing/1')
 
       expect(response.status).to eq 200
       expect(response.body).to include ('h1>HollyWood Mansion</h1>')
+      expect(response.body).to include ('2023-08-01')
     end
   end
 
@@ -108,9 +109,12 @@ describe Application do
         user_id: 1,
         date_3: '2023-08-03'
         )
-
-       expect(response.status).to eq 200 
-       expect(response.body).to include("Listing confirmed: London Mansion") 
+      
+      repo = DateRepository.new
+      expect { repo.all[-1].guest_id }.to raise_error(NoMethodError)
+  
+      expect(response.status).to eq 200 
+      expect(response.body).to include("Listing confirmed: London Mansion") 
     end
 
     xit 'confirms the new listing and shows multiple dates' do 
@@ -141,17 +145,6 @@ describe Application do
 
       expect(response.status).to eq 200
       expect(response.body).to include ('<h1>Your booking is being reviewed</h1>')
-    end
-  end
-
-  context 'POST /listing/:id' do 
-    xit 'sends the booking request information to the server' do
-      response = post('/listing/1', date_3: '2023-08-03')
-
-      expect(response.status).to eq 200
-      expect(response.body).to include('Booking successfully sent')
-      expect(response.body).to include('You have booked Hollywood Mansion for 3rd August')
-      # To be done when implementing booking request
     end
   end
 

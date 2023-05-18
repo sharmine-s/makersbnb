@@ -67,7 +67,6 @@ class Application < Sinatra::Base
     selected_dates.each do |date|
       new_date.listing_id = new_repo_list[-1].id
       new_date.date = date
-      new_date.guest_id = session[:user_id]
       repo_date.create(new_date)
     end
 

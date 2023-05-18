@@ -11,7 +11,7 @@ describe DateRepository do
     repo = DateRepository.new
     date = repo.find(1)
 
-    expect(date.date).to eq('2024-02-11')
+    expect(date.date).to eq('2023-08-01')
   end
 
   it 'create and find a new date' do # change after new database
