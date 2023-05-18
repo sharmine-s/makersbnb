@@ -1,14 +1,13 @@
-DROP TABLE dates;
-DROP TABLE listings;
-DROP TABLE users;
+DROP TABLE requests, listings, dates, requests;
 
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   name text,
   username text,
-  password text,
-  email text
+  email text,
+  password text
 );
+
 CREATE TABLE IF NOT EXISTS listings (
   id SERIAL PRIMARY KEY,
   title text,
@@ -25,9 +24,15 @@ CREATE TABLE IF NOT EXISTS dates (
   listing_id int,
     constraint fk_listing foreign key(listing_id) references listings(id) on delete cascade,
   date date,
-  requested boolean,
   guest_id int,
-    constraint fk_user foreign key(guest_id) references listings(id) on delete cascade,
-  confirmed boolean
+    constraint fk_user foreign key(guest_id) references users(id) on delete cascade
 );
 
+CREATE TABLE IF NOT EXISTS requests (
+  id SERIAL PRIMARY KEY,
+  listing_id int,
+    constraint fk_listing foreign key(listing_id) references listings(id) on delete cascade,
+  date date,
+  guest_id int,
+    constraint fk_user foreign key(guest_id) references users(id) on delete cascade
+);

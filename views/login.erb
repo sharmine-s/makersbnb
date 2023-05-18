@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        
+    </head>
+    <body>	
+        <div class="navbar">
+            <% if session[:user_id] == nil %>
+            <a href="/login"><button>Login</button></a>
+            <a href="/signup"><button>Signup</button></a><br>
+            <% else %>
+            <a href="/logout"><button>Logout</button></a>
+            <%end%>
+            <a href="/"><button>Homepage</button></a>
+        </div>
+      <form action="/login" method="POST">
+        <h1>Login</h1>  
+
+            <div>
+            <label>Email</label>
+            <input type="email" name="email">
+            </div>
+
+            <div>
+            <label>Password</label>
+            <input type="password" name="password">
+            </div>
+
+            <div>
+            <input type="submit" value="Submit the form">
+            </div>
+
+        </form>
+    </body>
+</html>
