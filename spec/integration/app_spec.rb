@@ -195,12 +195,33 @@ describe Application do
 
   context 'POST /login' do
     it 'logs a user in with correct password and email' do
-      response = post('/login', email: 'john1@smith.com', password: 'password1')
+      response = post(
+        '/signup',
+        name: 'John', 
+        username: 'john1', 
+        password: 'password1',
+        email: 'john@gmail.com'
+      )
+      response = post('/login', email: 'john@gmail.com', password: 'password1')
 
       expect(response.status).to eq 200
-      expect(response.body).to include '<h1>Welcome, John Smith</h1>'
+      expect(response.body).to include '<h1>Welcome, John</h1>'
       expect(response.body).to include 'You have succesfully be logged in'
     end
+
+    it 'redirects to signup page if no login details' do
+      response = post('/login', email: '', password: '')
+      response1 = get('/login')
+
+      expect(response.status).to eq 302
+      expect(response1.body).to include '<h1>Login</h1>'
+      expect(response1.body).to include 'Invalid'
+      expect(response1.body).to include '<form action="/login" method="POST">'
+      expect(response1.body).to include '<input type="email" name="email">'
+      expect(response1.body).to include '<input type="password" name="password">'
+    end
+
+  
   end 
 
   context 'GET /logout' do
