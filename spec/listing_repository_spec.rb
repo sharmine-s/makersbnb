@@ -1,5 +1,6 @@
 require_relative '../lib/listing_repository'
 require_relative './spec_helper'
+require 'bcrypt'
 
 describe ListingRepository do
   before(:each) do 
