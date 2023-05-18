@@ -133,6 +133,9 @@ describe Application do
       expect(response.body).to include('4th August') 
     end
   end
+=========
+>>>>>>>>> Temporary merge branch 2
+  
   
   context 'POST /booking/:id' do
     it 'should redirect to booking confirmation page with details of booking' do
@@ -143,6 +146,17 @@ describe Application do
     end
   end
 
+<<<<<<<<< Temporary merge branch 1
+  context 'POST /listing/:id' do 
+    it 'sends the booking request information to the server' do
+      response = post('/listing/1', name: 'john smith', comment: 'I want to stay here', date_3: 'true')
+
+      expect(response.status).to eq 200
+      expect(response.body).to include('Booking successfully sent')
+      expect(response.body).to include('You have booked Hollywood Mansion for 3rd August')
+    end
+  end
+=========
   context 'GET /signup' do
     it 'should return a form to create a new user' do
       response = get('/signup')
@@ -167,9 +181,8 @@ describe Application do
 
      expect(response.status).to eq(200)
      expect(response.body).to include(" <h1> SUCCESS </h1>")
-    end
-  end 
-
+     end
+    end 
   context 'GET /login' do
     it 'shows login form' do
         response = get('/login')
@@ -205,4 +218,5 @@ describe Application do
   end
 
 
+>>>>>>>>> Temporary merge branch 2
 end
