@@ -34,7 +34,7 @@ class DateRepository
 
     def find_listing_id(listing_id)
         sql = 'SELECT * FROM dates WHERE listing_id = $1;'
-        sql_params = listing_id
+        sql_params = [listing_id]
         result = DatabaseConnection.exec_params(sql, sql_params)
 
         dates = []
@@ -45,6 +45,22 @@ class DateRepository
         end
 
         return dates
+
+=begin
+        sql = 'SELECT id, listing_id, date, guest_id FROM dates WHERE listing_id = $1;'
+        sql_params = listing_id
+        result = DatabaseConnection.exec_params(sql, sql_params)
+        p result
+        p "hello!"
+        dates = []
+
+        result.each do |record|
+            create_date_object(record)
+            dates << record
+        end
+
+        return dates
+=end
     end
 
     private
@@ -55,12 +71,12 @@ class DateRepository
     end
 
     def create_date_object(record)
-        date = Date.new
-        date.id = record['id']
-        date.listing_id = record['listing_id']
-        date.date = record['date']
-        date.guest_id = record['guest_id']
+        date_object = Date.new
+        date_object.id = record['id']
+        date_object.listing_id = record['listing_id']
+        date_object.date = record['date']
+        date_object.guest_id = record['guest_id']
 
-        return date
+        return date_object
     end
 end
