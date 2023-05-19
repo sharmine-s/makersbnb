@@ -1,16 +1,4 @@
-<html>
-    <body>
-    <div class="navbar">
-        <% if session[:user_id] == nil %>
-        <a href="/login"><button>Login</button></a>
-        <a href="/signup"><button>Signup</button></a><br>
-        <% else %>
-        <a href="/logout"><button>Logout</button></a>
-        <%end%>
-        <a href="/"><button>Homepage</button></a>
-    </div>
-
+<body>
     <h1>Welcome, <%=@user.name%></h1> <br>
     <p>You have succesfully be logged in</p>
-    </body>
-</html>
+</body>

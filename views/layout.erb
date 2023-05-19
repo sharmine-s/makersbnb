@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MakersBnB</title>
+  </head>
+
+  <body>
+
+        <div class="navbar">
+        <a href="/"><button>Homepage</button></a>
+        <% if session[:user_id] == nil %>
+        <a href="/login"><button>Login</button></a>
+        <a href="/signup"><button>Signup</button></a><br>
+        <% else %>
+        <a href="/logout"><button>Logout</button></a>
+        <%end%>
+        </div>
+
+    <main><%= yield %></main>
+    <footer>made by baskets</footer>
+  </body>
+</html>
