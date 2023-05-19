@@ -1,36 +1,30 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>MakersBnB</title>
+<head>
+    <title>MakersBnB</title>
 
-        <!--
-            Head to https://github.com/makersacademy/web-applications/blob/main/pills/loading_css_or_static_files.md
-            If you're wondering how the CSS file below is being loaded.
-        -->
-        <link rel="stylesheet" href="/style.css" >
-    </head>
+    <!--
+        Head to https://github.com/makersacademy/web-applications/blob/main/pills/loading_css_or_static_files.md
+        If you're wondering how the CSS file below is being loaded.
+    -->
+    <link rel="stylesheet" href="/style.css" >
+</head>
 
-    <body>
-    <div class="navbar">
-        <% if session[:user_id] == nil %>
-        <a href="/login"><button>Login</button></a>
-        <a href="/signup"><button>Signup</button></a><br>
-        <% else %>
-        <a href="/logout"><button>Logout</button></a>
-        <%end%>
-    </div>
+<body>
 
-        <h1>Welcome to MakersBnB</h1>
-        <a href='/new_listing'> <button type='button'> Create new listing </button></a><br>
-        <a href='/booking_request'> <button type='button'> Booking Requests </button></a><br>
-        <% @listings.each do |listing| %>
-        <br>
-        <%= listing.title %> <br>
-        <%= listing.description %> <br>
-        <%= listing.location %> <br>
-        <%= listing.price %>/night <br>
-        <img src='<%=listing.img%>' alt='Under Hollywood Sign' width="500"> <br>
-        <a href='/listing/<%=listing.id%>'> <button type="button">See More</button></a><br>
-       <% end %>
-    </body>
-</html>
+
+    <h1>Welcome to MakersBnB</h1>
+
+    <!-- delete these two links once user_id (account page) page created -->
+    <a href='/new_listing'> <button type='button'> Create new listing </button></a><br>
+    <a href='/booking_request'> <button type='button'> Booking Requests </button></a><br>
+
+    <% @listings.each do |listing| %>
+    <br>
+    <%= listing.title %> <br>
+    <%= listing.description %> <br>
+    <%= listing.location %> <br>
+    <%= listing.price %>/night <br>
+    <img src='<%=listing.img%>' alt='Under Hollywood Sign' width="500"> <br>
+    <a href='/listing/<%=listing.id%>'> <button type="button">See More</button></a><br>
+    <% end %>
+</body>
+
