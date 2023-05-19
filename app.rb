@@ -93,6 +93,12 @@ class Application < Sinatra::Base
     @username = params[:username]
     @email = params[:email]
     password = params[:password]
+
+    if name == "" || @username == "" || @email == "" || password == ""
+      flash[:error] = 'Please fill in every field'
+      return redirect '/signup'
+    else
+
     
     new_user = User.new
     new_user.name = name
@@ -102,6 +108,8 @@ class Application < Sinatra::Base
     UserRepository.new.create(new_user)
     return erb(:account_created)
   end
+end
+
   get '/login' do
     return erb(:login)
   end
