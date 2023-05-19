@@ -130,4 +130,7 @@ class Application < Sinatra::Base
     return erb(:booking_confirm)
   end
 
+  get '/account/:id' do
+    return erb(:account_page)
+  end
 end
