@@ -78,15 +78,15 @@ def sign_in(email, submitted_password)
     return false
 end
 
-def find_with_listings(id)
-  sql = 'SELECT listings.title, listings.description, listings.img, listings.price, listings.price
-            FROM listings
-            JOIN users ON listings.user_id = users.id
-            WHERE users.id = $1;'
+# def find_with_listings(id)
+#   sql = 'SELECT listings.title, listings.description, listings.img, listings.price, listings.price
+#             FROM listings
+#             JOIN users ON listings.user_id = users.id
+#             WHERE users.id = $1;'
   
-  result = DatabaseConnection.exec_params(sql, [id])
-  create_listing_object(result.first)
-end
+#   result = DatabaseConnection.exec_params(sql, [id])
+#   create_listing_object(result.first)
+# end
 
   private
 
