@@ -1,42 +1,32 @@
-<html>
-    <head>
-        <style>
-        h1 {text-align: center;}
-        p {text-align: center;}
-        div {text-align: center;}
-        </style>
-    </head>
+<head>
+    <style>
+    h1 {text-align: center;}
+    p {text-align: center;}
+    div {text-align: center;}
+    </style>
+</head>
 
-    <body>
-        <div class="navbar">
-            <% if session[:user_id] == nil %>
-            <a href="/login"><button>Login</button></a>
-            <a href="/signup"><button>Signup</button></a><br>
-            <% else %>
-            <a href="/logout"><button>Logout</button></a>
-            <%end%>
-            <a href="/"><button>Homepage</button></a>
-        </div>
+<body>
 
-     <h1><%= @listing.title %></h1><br />
-     <p>
-        <%= @listing.location %><br />
-        <%= @listing.description %><br />
-        <%= @listing.price %>/night<br />
-       <img src='<%= @listing.img %>' alt='Nicolas Cage'>
-     
-         <h2>Booking Request</h2>
-        <form action="/booking/<%=@listing.id%>" method="POST">
-            <label for>Pick a date:</label> <br>
-            <% %>
-            <button name="date1" value="true">1st of August</button>
-       <br><br>
-            <input type="submit" name="Submit">
 
-        </form>
-    </p>
+    <h1><%= @listing.title %></h1><br />
+    <p>
+    <%= @listing.location %><br />
+    <%= @listing.description %><br />
+    <%= @listing.price %>/night<br />
+    <img src='<%= @listing.img %>' alt='Nicolas Cage'>
+    
+        <h2>Booking Request</h2>
+    <form action="/booking/<%=@listing.id%>" method="POST">
+        <label for>Pick a date:</label> <br>
+        <% %>
+        <button name="date1" value="true">1st of August</button>
+    <br><br>
+        <input type="submit" name="Submit">
 
-        <a href="/"><button type="button">Go back Main Page</button></a>
+    </form>
+</p>
 
-    </body>
-</html>
+    <a href="/"><button type="button">Go back Main Page</button></a>
+
+</body>
