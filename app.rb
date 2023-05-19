@@ -150,7 +150,8 @@ end
 
     # @listings = ListingRepository.new.find(session[:user_id])
     @listings = ListingRepository.new.all
-
+    @current_user = session[:user_id]
+    
     return erb(:account_page)
   end
 end
