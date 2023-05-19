@@ -19,13 +19,14 @@
     <a href='/booking_request'> <button type='button'> Booking Requests </button></a><br>
 
     <h2> Your Listings </h2>
-        <% @listings.each do |listing| %>
-        <br>
-        <%= listing.title %> <br>
-        <%= listing.description %> <br>
-        <%= listing.location %> <br>
-        <%= listing.price %>/night <br>
-        <img src='<%=listing.img%>' alt='Under Hollywood Sign' width="500"> <br>
+    <% @listings.each do |listing| %><br>
+        <%if listing.user_id == @current_user %> <br>  
+            <%= listing.title %> <br>
+            <%= listing.description %> <br>
+            <%= listing.location %> <br>
+            <%= listing.price %>/night <br>
+            <img src='<%=listing.img%>' alt='Under Hollywood Sign' width="500"> <br>
         <% end %>
+    <% end %>
     
 </body>
