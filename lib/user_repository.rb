@@ -22,6 +22,25 @@ class UserRepository
     return nil
   end
 
+  def find_by_id(id)
+  
+    sql = 'SELECT id, name, username, password, email
+            FROM users 
+            WHERE id = $1;'
+    
+    sql_params = [id]
+
+    result = DatabaseConnection.exec_params(sql, sql_params)
+
+    if !result.ntuples.zero?
+        record = result[0]
+        return create_user_object(record)
+    else
+        return nil
+    end
+
+  end
+
 
   def find_by_email(email)
   
