@@ -8,8 +8,7 @@ class DateRepository
         dates = []
 
         result.each do |record|
-            create_date_object(record)
-            dates << record
+            dates << create_date_object(record)
         end
 
         return dates
@@ -40,8 +39,7 @@ class DateRepository
         dates = []
 
         result.each do |record|
-            create_date_object(record)
-            dates << record
+            dates << create_date_object(record)
         end
 
         return dates

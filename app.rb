@@ -27,15 +27,12 @@ class Application < Sinatra::Base
 
   get '/listing/:id' do
     repo_date = DateRepository.new
+    repo_list = ListingRepository.new
     eyedee = params[:id]
 
     @dates = repo_date.find_listing_id(eyedee)
-    p @dates
-    @dates.each { |yymmdd| yymmdd.date } 
-=begin
+
     @listing = repo_list.find(params[:id])
-    @spaces = repo_list.find_listing_id(@listing.to_i)
-=end
     # p @available_dates
     
     return erb(:listing)
