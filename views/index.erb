@@ -12,11 +12,7 @@
 
 
     <h1>Welcome to MakersBnB</h1>
-
-    <!-- delete these two links once user_id (account page) page created -->
-    <a href='/new_listing'> <button type='button'> Create new listing </button></a><br>
-    <a href='/booking_request'> <button type='button'> Booking Requests </button></a><br>
-
+   
     <% @listings.each do |listing| %>
     <br>
     <%= listing.title %> <br>

@@ -24,7 +24,7 @@ class ListingRepository
 
   def find(id)
     result_set = fetch_data(id)
-    create_listing_object(result_set.first)
+    return create_listing_object(result_set.first)
   end
 
   private

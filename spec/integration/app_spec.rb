@@ -255,4 +255,13 @@ describe Application do
     end
    end
 
+   context 'GET /account/:id' do
+    it 'shows account information for user 1' do
+     response = post('/login', email: 'john1@smith.com', password: 'password1')
+     response = get('/account/1')
+       expect(response.status).to eq(200)
+       expect(response.body).to include('Create new listing')
+    end
+   end
+
 end

@@ -145,4 +145,12 @@ end
     return erb(:booking_confirm)
   end
 
+  get '/account/:id' do
+    @user = UserRepository.new.find_by_id(session[:user_id])
+
+    # @listings = ListingRepository.new.find(session[:user_id])
+    @listings = ListingRepository.new.all
+
+    return erb(:account_page)
+  end
 end
