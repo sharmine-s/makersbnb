@@ -1,4 +1,5 @@
 require_relative './user'
+require_relative './listing_repository'
 require 'bcrypt'
 
 class UserRepository
@@ -58,6 +59,16 @@ def sign_in(email, submitted_password)
     return false
 end
 
+def find_with_listings(id)
+  sql = 'SELECT listings.title, listings.description, listings.img, listings.price, listings.price
+            FROM listings
+            JOIN users ON listings.user_id = users.id
+            WHERE users.id = $1;'
+  
+  result = DatabaseConnection.exec_params(sql, [id])
+  create_listing_object(result.first)
+end
+
   private
 
   def create_user_object(record)
@@ -69,6 +80,19 @@ end
      user.password = record['password']
      
      return user
+  end
+
+  def create_listing_object(record)
+    listing = Listing.new
+    listing.id = record['id']
+    listing.title = record['title']
+    listing.description = record['description']
+    listing.img = record['img']
+    listing.price = record['price']
+    listing.location = record['location']
+    listing.user_id = record['user_id']
+
+    return listing
   end
 
 end

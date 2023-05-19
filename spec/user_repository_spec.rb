@@ -36,4 +36,13 @@ end
     end
   end
 
+  context 'find with listings' do
+    it 'should return all listings from user 1' do
+      repo = UserRepository.new
+      result = repo.find_with_listings(1)
+
+      expect(result.title).to eq 'HollyWood Mansion' 
+    end
+  end
+
 end

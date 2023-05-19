@@ -131,6 +131,13 @@ class Application < Sinatra::Base
   end
 
   get '/account/:id' do
+    # session[:user_id] = @user.id
+    # repo = UserRepository.new
+    # @user = repo.find(params[:id])
+
+    # session[:user_id] = params[:id]
+    # @user = UserRepository.new.find(session[:user_id])
+
     return erb(:account_page)
   end
 end
