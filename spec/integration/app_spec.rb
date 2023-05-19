@@ -40,7 +40,7 @@ describe Application do
   end
 
   context 'GET /listing/:id' do
-    xit 'should show the information of listing 1' do
+    it 'should show the information of listing 1' do
       response = get('/listing/1')
 
       expect(response.status).to eq 200
@@ -111,13 +111,13 @@ describe Application do
         )
       
       repo = DateRepository.new
-      expect { repo.all[-1].guest_id }.to raise_error(NoMethodError)
-  
+      expect(repo.all[-1].guest_id).to eq nil
+      
       expect(response.status).to eq 200 
       expect(response.body).to include("Listing confirmed: London Mansion") 
     end
 
-    xit 'confirms the new listing and shows multiple dates' do 
+    it 'confirms the new listing and shows multiple dates' do 
       response = post('/new_listing',
         title: 'London Mansion', 
         description: 'A beautiful mansion right under the hollywood sign in London', 
@@ -134,7 +134,9 @@ describe Application do
       expect(response.body).to include('Listing confirmed: London Mansion') 
 
       listing = get('/listing/3')
-      expect(listing.body).to include('')
+      expect(listing.body).to include('2023-08-03')
+      expect(listing.body).to include('2023-08-04')
+      expect(listing.body).to include('2023-08-05')
       # Update test to expect correct dates in listing.body
     end
   end
