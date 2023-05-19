@@ -1,3 +1,4 @@
+require_relative '../lib/database_connection'
 require_relative '../lib/date_repository'
 require_relative './spec_helper'
 
@@ -28,5 +29,13 @@ describe DateRepository do
     expect(fresh_date.listing_id).to eq('1')
     expect(fresh_date.date).to eq('2023-08-06')
     expect(fresh_date.guest_id).to eq(nil)
+  end
+
+  it 'uses a listing id to find the relevant dates' do 
+    repo = DateRepository.new
+
+    listing_id = '1'
+    dates_details = repo.find_listing_id(listing_id)
+    expect(dates_details[0].date).to eq "2023-08-01"
   end
 end 

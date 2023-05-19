@@ -26,10 +26,17 @@ class Application < Sinatra::Base
   end
 
   get '/listing/:id' do
-    repo = ListingRepository.new
-    @listing = repo.find(params[:id])
-  
+    repo_date = DateRepository.new
+    repo_list = ListingRepository.new
+    eyedee = params[:id]
+
+    @dates = repo_date.find_listing_id(eyedee)
+
+    @listing = repo_list.find(params[:id])
+    # p @available_dates
+    
     return erb(:listing)
+    # <% @available_dates.each do |date| %> re-add under "Pick a date .erb"
   end
 
   post '/booking/:id' do

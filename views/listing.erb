@@ -19,11 +19,11 @@
         <h2>Booking Request</h2>
     <form action="/booking/<%=@listing.id%>" method="POST">
         <label for>Pick a date:</label> <br>
-        <% %>
-        <button name="date1" value="true">1st of August</button>
+        <% @dates.each do |yymmdd|   %>
+        <button value="<%=yymmdd.date%>"><%=yymmdd.date%></button>
+        <% end %>
     <br><br>
         <input type="submit" name="Submit">
-
     </form>
 </p>
 
