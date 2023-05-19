@@ -18,25 +18,21 @@
             <a href="/"><button>Homepage</button></a>
         </div>
 
-     <h1><%= @listing.title %></h1><br />
+     <h1>You've a new booking request</h1>
+     <p>From: John Smith</p>
+     <p>Comment: I want to book this place</p>
+     <p>Pick a date: 2nd of August</p><br />
+     <h1><%= @listing.title %></h1>
      <p>
         <%= @listing.location %><br />
         <%= @listing.description %><br />
         <%= @listing.price %>/night<br />
-       <img src='<%= @listing.img %>' alt='Nicolas Cage'>
-     
-         <h2>Booking Request</h2>
-        <form action="/booking/<%=@listing.id%>" method="POST">
-            <label for>Pick a date:</label> <br>
-            <% %>
-            <button name="date1" value="true">1st of August</button>
-       <br><br>
-            <input type="submit" name="Submit">
-
-        </form>
-    </p>
-
-        <a href="/"><button type="button">Go back Main Page</button></a>
-
+       <img src='<%= @listing.img %>' alt='Nicolas Cage'> <br /><br />
+     </p>
+       <form action="/booking_request" method="POST"> 
+        <p>
+          <a href="/"><button>Approve</button></a>
+        </p>
+       </form>
     </body>
 </html>
