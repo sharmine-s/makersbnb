@@ -1,36 +1,22 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>MakersBnB</title>
+<head>
+<title>MakersBnB</title>
 
-        <!--
-            Head to https://github.com/makersacademy/web-applications/blob/main/pills/loading_css_or_static_files.md
-            If you're wondering how the CSS file below is being loaded.
-        -->
-        <link rel="stylesheet" href="/style.css" >
-    </head>
-    <body>
-        <div class="navbar">
-            <% if session[:user_id] == nil %>
-            <a href="/login"><button>Login</button></a>
-            <a href="/signup"><button>Signup</button></a><br>
-            <% else %>
-            <a href="/logout"><button>Logout</button></a>
-            <%end%>
-            <a href="/"><button>Homepage</button></a>
-        </div>
-    
-        <h1>Your booking is being reviewed</h1>
-        <a href="/"><button type="button">Go back Main Page</button></a>
+<!--
+    Head to https://github.com/makersacademy/web-applications/blob/main/pills/loading_css_or_static_files.md
+    If you're wondering how the CSS file below is being loaded.
+-->
+<link rel="stylesheet" href="/style.css" >
+</head>
+<body>
 
-        <p> <h2><%= @listing.title %></h2><br />
-           <%= @listing.location %><br />
-           <%= @listing.description %><br />
-           <%= @listing.price %><br />
-          <img src='<%= @listing.img %>' alt='Nicolas Cage'>
-        </p>
+<h1>Your booking is being reviewed</h1>
+<a href="/"><button type="button">Go back Main Page</button></a>
 
+<p> <h2><%= @listing.title %></h2><br />
+    <%= @listing.location %><br />
+    <%= @listing.description %><br />
+    <%= @listing.price %><br />
+    <img src='<%= @listing.img %>' alt='Nicolas Cage'>
+</p>
 
-
-    </body>
-</html>
+</body>

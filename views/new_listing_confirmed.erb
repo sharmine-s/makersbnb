@@ -1,21 +1,10 @@
-<html>
-    <head>
+<head>
     <title>Listing Confirmed</title>
-    </head>
-    <body>
-        <div class="navbar">
-            <% if session[:user_id] == nil %>
-            <a href="/login"><button>Login</button></a>
-            <a href="/signup"><button>Signup</button></a><br>
-            <% else %>
-            <a href="/logout"><button>Logout</button></a>
-            <%end%>
-            <a href="/"><button>Homepage</button></a>
-        </div>
+</head>
 
+<body>
     <h1>Listing confirmed: <%= @listing_title %></h1> <br>
     <img src='<%= @listing_img %>'
-     alt='New listing picture' width="250"> <br><br><br>
+        alt='New listing picture' width="250"> <br><br><br>
     <a href='/'> <button type="button">Return to Homepage</button></a>
-    </body>
-</html>
+</body>
